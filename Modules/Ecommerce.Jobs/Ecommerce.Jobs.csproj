@@ -4,7 +4,6 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>dotnet-RagCopilot.Worker-06a0e167-4e91-4771-9ade-67a44ccd65cf</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +11,5 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RagCopilot.Application\RagCopilot.Application.csproj" />
   </ItemGroup>
 </Project>

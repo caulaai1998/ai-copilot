@@ -12,8 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RagCopilot.Application\RagCopilot.Application.csproj" />
-    <ProjectReference Include="..\RagCopilot.Infrastructure\RagCopilot.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

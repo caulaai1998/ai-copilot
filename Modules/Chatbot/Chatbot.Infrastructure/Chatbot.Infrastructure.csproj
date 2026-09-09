@@ -1,7 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\RagCopilot.Domain\RagCopilot.Domain.csproj" />
+    <ProjectReference Include="..\Chatbot.Application\Chatbot.Application.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Qdrant.Client" Version="1.19.0" />
   </ItemGroup>
 
   <PropertyGroup>
