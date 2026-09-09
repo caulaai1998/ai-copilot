@@ -38,3 +38,21 @@ dotnet run --project RagCopilot.Worker
 4. **No Secrets Manager Fallback:**
    - Secrets and API Keys MUST be exclusively retrieved from the Secrets Manager (AWS Secrets Manager / Azure Key Vault). This is the Single Source of Truth.
    - STRICTLY PROHIBITED to write fallback logic to environment variables (`process.env`) or static constants if secret retrieval fails. MUST Fail-Fast (throw an explicit Error) and halt execution immediately.
+
+   # CODE REVIEW & DESIGN PRINCIPLES (OOP & SOLID FIRST)
+
+1. **Object-Oriented Programming (OOP) First:**
+   - **Encapsulation:** Strongly enforce encapsulation. Business logic MUST reside inside Domain Entities/Value Objects, not scattered across Anemic Domain Models.
+   - **Abstraction:** Hide implementation details behind interfaces or abstract classes. Expose only what is necessary.
+   - **Inheritance vs Composition:** Favor Composition over Inheritance to avoid brittle class hierarchies.
+
+2. **Strict SOLID Principles:**
+   - **S (Single Responsibility):** Each class/service MUST have only one reason to change. Tightly separate API controllers, CQRS handlers, and infrastructure clients.
+   - **O (Open/Closed):** Code must be open for extension but closed for modification. Use Strategy, Factory, or Decorator patterns when handling multiple providers (e.g., LLM Providers: OpenAI, Anthropic).
+   - **L (Liskov Substitution):** Derived classes or interface implementations must be fully substitutable for their base types without altering system correctness.
+   - **I (Interface Segregation):** Avoid fat interfaces. Split them into small, purpose-specific interfaces (e.g., `IReadRepository`, `IWriteRepository`).
+   - **D (Dependency Inversion):** High-level modules (Domain/Application) MUST NOT depend on low-level modules (Infrastructure). Both MUST depend on Abstractions (Interfaces).
+
+3. **Code Review Execution Rule:**
+   - When reviewing or writing code, AI MUST proactively evaluate the code against OOP and SOLID principles.
+   - If any violation (e.g., tight coupling, static dependencies, God classes, anemic domain models) is detected, AI MUST explicitly point it out and offer a refactored solution adhering to SOLID.
