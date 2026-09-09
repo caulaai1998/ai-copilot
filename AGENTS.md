@@ -56,3 +56,26 @@ dotnet run --project RagCopilot.Worker
 3. **Code Review Execution Rule:**
    - When reviewing or writing code, AI MUST proactively evaluate the code against OOP and SOLID principles.
    - If any violation (e.g., tight coupling, static dependencies, God classes, anemic domain models) is detected, AI MUST explicitly point it out and offer a refactored solution adhering to SOLID.
+
+   # FRONTEND CODE REVIEW STANDARDS (REACT + TYPESCRIPT)
+
+1. **Strict Feature-Sliced Architecture:**
+   - Code MUST be organized by feature in `src/features/{feature-name}` (e.g., `chat`, `documents`, `auth`).
+   - Tightly separate UI components (Presentational/Dumb) from business logic (Custom Hooks/Redux Slices/Containers). Components should only focus on rendering.
+
+2. **Absolute Type-Safety & Contract Integrity:**
+   - NEVER use `any` or loose type assertions (`as unknown`). Every API response, state, and component prop MUST have explicit TypeScript interfaces.
+   - API DTOs in Frontend MUST strictly mirror Backend response contracts.
+
+3. **Performance & Memory Management:**
+   - **Stream Cleanup:** EventSource (SSE) or WebSocket connections MUST be properly closed in `useEffect` cleanup functions to avoid memory leaks.
+   - **Render Optimization:** Prevent unnecessary re-renders using `useCallback`, `useMemo`, or React Compiler patterns where heavy calculations or complex object props are involved.
+   - Avoid creating inline functions or objects inside jsx loops or heavily updated components.
+
+4. **State Management Discipline (Redux Toolkit):**
+   - Keep global Redux state minimal (global auth, active chat session status, document processing state). Local state (inputs, toggles) MUST remain inside `useState`.
+   - Async calls MUST be handled via `createAsyncThunk` or RTK Query with standardized `loading`, `error`, and `data` states.
+
+5. **Streaming UX Resilience:**
+   - Chat UI components MUST support incremental text append (typing effect) without breaking scroll position or throwing UI layout shifts during active SSE streaming.
+   - MUST handle network dropouts gracefully during stream responses with user-friendly retry states.
